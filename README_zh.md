@@ -1,5 +1,7 @@
 # Codex 协作技能
 
+🌐 [English](README.md) | 中文
+
 > 为 Claude Code 提供 AI 驱动的代码审查、实现规划和调试功能，通过 MCP 工具与 Codex 进行深度协作。
 
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/cyenxchen/codex-skill/releases)
@@ -162,7 +164,3 @@ Claude：（继续之前的 Codex 对话）
 ## 📄 许可证
 
 MIT License - Copyright (c) 2025 GuDaStudio
-
----
-
-🌐 **Language / 语言**: [English](README.md) | 中文

@@ -1,5 +1,7 @@
 # Codex Collaboration Skill
 
+🌐 English | [中文](README_zh.md)
+
 > A Claude Code skill for AI-powered code review, implementation planning, and debugging through deep collaboration with Codex via MCP tools.
 
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/cyenxchen/codex-skill/releases)
@@ -162,7 +164,3 @@ OK, let's continue our discussion...
 ## 📄 License
 
 MIT License - Copyright (c) 2025 GuDaStudio
-
----
-
-🌐 **Language / 语言**: English | [中文](README_zh.md)
