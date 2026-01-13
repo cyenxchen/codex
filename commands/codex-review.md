@@ -1,4 +1,5 @@
 ---
+name: codex-review
 description: Review code changes, files, or git diffs for bugs, security issues, and quality problems with Codex assistance. Focus on correctness, security, performance, and maintainability.
 allowed-tools: mcp__codex__codex, Read, Grep, Glob, Bash(git:*)
 argument-hint: [path|diff] [focus=security|perf|style] [session=<id>]

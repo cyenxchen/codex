@@ -2,11 +2,28 @@
 name: codex
 description: Collaborate with Codex AI for code review, implementation planning, and debugging. Provides guidance for effective Claude-Codex collaboration workflow using read-only analysis and diff-based suggestions. Use when reviewing code, planning features, or debugging errors with Codex assistance.
 version: 0.1.0
+user-invocable: true
+allowed-tools:
+  - mcp__codex__codex
+  - Read
+  - Grep
+  - Glob
+  - Bash(git:*)
+hooks:
+  PreToolUse:
+    - matcher: "mcp__codex__codex"
+      hooks:
+        - type: prompt
+          prompt: "调用 Codex 前请确保：1) 已输出初步分析 2) 使用 sandbox='read-only'"
 ---
 
 # Codex 协作指南
 
 当用户提到 Codex 时，自动激活此协作流程。
+
+## 前置条件
+
+使用此 Skill 前需要安装 CodexMCP 服务器。详见 [README.md](README.md) 安装说明。
 
 **完整的协作规则和模式详见：**`reference/shared-patterns.md`
 
@@ -24,11 +41,11 @@ version: 0.1.0
 
 根据用户意图自动选择合适的协作模式：
 
-| 场景关键词 | 推荐命令 | 说明 |
+| 场景关键词 | 协作模式 | 说明 |
 |-----------|---------|------|
-| 审查、review、检查代码 | `/codex-review` | 代码审查，发现问题 |
-| 规划、plan、设计、实现 | `/codex-plan` | 需求分析，生成计划 |
-| debug、报错、定位、bug | `/codex-debug` | 问题定位，修复建议 |
+| 审查、review、检查代码 | 代码审查 | 发现 bugs、安全问题、代码质量问题 |
+| 规划、plan、设计、实现 | 需求分析 | 生成实现计划、任务拆解 |
+| debug、报错、定位、bug | 问题定位 | 根因分析、修复建议 |
 
 ## 工作流程（简要）
 
@@ -51,9 +68,9 @@ Codex 协作遵循标准的6步工作流程：
 
 *详细的会话管理规范见 reference/shared-patterns.md*
 
-## 可用命令参考
+## 命令参考
 
-以下命令的详细文档见 `commands/` 目录。注意：在纯 Skill 模式下，这些命令不会自动注册为 slash commands，建议使用自然语言触发相应的协作流程。
+以下命令的详细文档见 `commands/` 目录：
 
 - **代码审查**：详见 `commands/codex-review.md` - 审查代码改动、发现问题
 - **需求分析**：详见 `commands/codex-plan.md` - 规划功能、拆解任务

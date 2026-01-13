@@ -1,4 +1,5 @@
 ---
+name: codex-debug
 description: Locate bug root causes by analyzing errors and code with Codex help. Identify probable causes, provide investigation steps, and suggest minimal fixes with test cases.
 allowed-tools: mcp__codex__codex, Read, Grep, Glob, Bash(git:*)
 argument-hint: [symptom] [error] [session=<id>]

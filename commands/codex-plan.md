@@ -1,4 +1,5 @@
 ---
+name: codex-plan
 description: Analyze requirements and generate implementation plans through Codex collaboration. Break down requirements into tasks, assess risks, and define acceptance criteria.
 allowed-tools: mcp__codex__codex, Read, Grep, Glob, Bash(git:*)
 argument-hint: [goal] [constraints] [session=<id>]
