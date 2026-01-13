@@ -2,7 +2,7 @@
 
 > A Claude Code skill for AI-powered code review, implementation planning, and debugging through deep collaboration with Codex via MCP tools.
 
-[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/GuDaStudio/codexmcp)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/cyenxchen/codex/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ## ✨ Features
@@ -24,32 +24,36 @@ claude mcp add codex -s user --transport stdio -- uvx --from git+https://github.
 
 ## 🚀 Installation
 
-### Option 1: Symlink (Recommended)
+### Option 1: Download Release (Recommended)
 
-Best for developers who want automatic updates when the source changes.
+Download the latest release and extract to your skills directory.
+
+```bash
+# Download latest release
+curl -L https://github.com/cyenxchen/codex/releases/latest/download/codex-skill-v1.0.0.zip -o codex-skill.zip
+
+# Extract to Claude skills directory
+unzip codex-skill.zip -d ~/.claude/skills/codex
+
+# Verify installation
+ls ~/.claude/skills/codex/SKILL.md
+```
+
+Or manually download from [Releases](https://github.com/cyenxchen/codex/releases).
+
+### Option 2: Clone Repository
+
+Best for developers who want to contribute or customize.
 
 ```bash
 # Clone the repository
-git clone https://github.com/GuDaStudio/codexmcp.git
-cd codexmcp
+git clone https://github.com/cyenxchen/codex.git
 
 # Create symlink (using absolute path)
-ln -s "$(pwd)/skill" ~/.claude/skills/codex
+ln -s "$(pwd)/codex" ~/.claude/skills/codex
 
 # Verify installation
 ls -la ~/.claude/skills/codex/SKILL.md
-```
-
-### Option 2: Direct Copy
-
-Best for users who prefer a stable, offline copy.
-
-```bash
-# Clone the repository
-git clone https://github.com/GuDaStudio/codexmcp.git
-
-# Copy to Claude skills directory
-cp -r codexmcp/skill ~/.claude/skills/codex
 ```
 
 ### Permission Configuration (Optional)

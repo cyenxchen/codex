@@ -2,7 +2,7 @@
 
 > 为 Claude Code 提供 AI 驱动的代码审查、实现规划和调试功能，通过 MCP 工具与 Codex 进行深度协作。
 
-[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/GuDaStudio/codexmcp)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/cyenxchen/codex/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ## ✨ 功能特性
@@ -24,32 +24,36 @@ claude mcp add codex -s user --transport stdio -- uvx --from git+https://github.
 
 ## 🚀 安装方式
 
-### 方式一：软链接（推荐）
+### 方式一：下载 Release（推荐）
 
-适合需要自动同步更新的开发者。
+下载最新版本并解压到 skills 目录。
+
+```bash
+# 下载最新版本
+curl -L https://github.com/cyenxchen/codex/releases/latest/download/codex-skill-v1.0.0.zip -o codex-skill.zip
+
+# 解压到 Claude skills 目录
+unzip codex-skill.zip -d ~/.claude/skills/codex
+
+# 验证安装
+ls ~/.claude/skills/codex/SKILL.md
+```
+
+或从 [Releases](https://github.com/cyenxchen/codex/releases) 手动下载。
+
+### 方式二：克隆仓库
+
+适合需要贡献代码或自定义的开发者。
 
 ```bash
 # 克隆仓库
-git clone https://github.com/GuDaStudio/codexmcp.git
-cd codexmcp
+git clone https://github.com/cyenxchen/codex.git
 
 # 创建软链接（使用绝对路径）
-ln -s "$(pwd)/skill" ~/.claude/skills/codex
+ln -s "$(pwd)/codex" ~/.claude/skills/codex
 
 # 验证安装
 ls -la ~/.claude/skills/codex/SKILL.md
-```
-
-### 方式二：直接复制
-
-适合需要稳定离线副本的用户。
-
-```bash
-# 克隆仓库
-git clone https://github.com/GuDaStudio/codexmcp.git
-
-# 复制到 Claude skills 目录
-cp -r codexmcp/skill ~/.claude/skills/codex
 ```
 
 ### 权限配置（可选）
