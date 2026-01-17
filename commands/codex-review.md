@@ -2,7 +2,7 @@
 name: codex-review
 description: Review code changes, files, or git diffs for bugs, security issues, and quality problems with Codex assistance. Focus on correctness, security, performance, and maintainability.
 allowed-tools: mcp__codex__codex, Read, Grep, Glob, Bash(git:*)
-argument-hint: [path|diff] [focus=security|perf|style] [session=<id>]
+argument-hint: [path|diff] [focus=security|perf|style] [plan=<path>] [session=<id>]
 ---
 
 # Codex 代码审查
@@ -27,7 +27,10 @@ argument-hint: [path|diff] [focus=security|perf|style] [session=<id>]
 - **审查目标**：文件路径 | `git diff` | `git diff HEAD~N`
 - **可选参数**：
   - `focus=security|perf|style` - 重点关注维度
+  - `plan=<path>` - 指定计划文件（自动检测 `.claude/plans/*.md`，`plan=none` 禁用）
   - `session=<id>` - 继续之前的会话
+
+**计划文件用途**：审查时对照计划中的验收标准，检查实现是否符合预期。
 
 **若信息不足，向用户提问后停止。**
 

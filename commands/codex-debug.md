@@ -2,7 +2,7 @@
 name: codex-debug
 description: Locate bug root causes by analyzing errors and code with Codex help. Identify probable causes, provide investigation steps, and suggest minimal fixes with test cases.
 allowed-tools: mcp__codex__codex, Read, Grep, Glob, Bash(git:*)
-argument-hint: [symptom] [error] [session=<id>]
+argument-hint: [symptom] [error] [plan=<path>] [session=<id>]
 ---
 
 # Codex Debug 定位
@@ -26,7 +26,11 @@ argument-hint: [symptom] [error] [session=<id>]
 从 `$ARGUMENTS` 中提取：
 - **问题症状**：错误信息、异常、日志片段
 - **可疑路径**：相关文件或模块
-- **可选参数**：`session=<id>` - 继续之前的会话
+- **可选参数**：
+  - `plan=<path>` - 指定排查计划文件（自动检测 `.claude/plans/*.md`，`plan=none` 禁用）
+  - `session=<id>` - 继续之前的会话
+
+**排查计划用途**：若检测到排查计划文件，将读取已排查的假设和进展，避免重复验证已排除的假设。
 
 **若信息不足，向用户追问**：
 - 具体的错误信息或日志

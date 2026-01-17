@@ -1,7 +1,7 @@
 ---
 name: codex
-description: Collaborate with Codex AI for code review, implementation planning, and debugging. Provides guidance for effective Claude-Codex collaboration workflow using read-only analysis and diff-based suggestions. Use when reviewing code, planning features, or debugging errors with Codex assistance.
-version: 0.1.0
+description: Collaborate with Codex AI for code review, implementation planning, and debugging. Supports plan context from .claude/plans/ for context-aware collaboration. Provides guidance for effective Claude-Codex workflow using read-only analysis and diff-based suggestions.
+version: 0.2.0
 user-invocable: true
 allowed-tools:
   - mcp__codex__codex
@@ -14,7 +14,7 @@ hooks:
     - matcher: "mcp__codex__codex"
       hooks:
         - type: prompt
-          prompt: "调用 Codex 前请确保：1) 已输出初步分析 2) 使用 sandbox='read-only'"
+          prompt: "调用 Codex 前请确保：1) 已输出初步分析 2) 使用 sandbox='read-only' 3) 若有计划文件，已包含在 PROMPT 中"
 ---
 
 # Codex 协作指南
