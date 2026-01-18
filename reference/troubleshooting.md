@@ -30,19 +30,22 @@ claude mcp list
 
 **方法一：Release 下载（推荐）**
 ```bash
-curl -L https://github.com/cyenxchen/codex-skill/releases/latest/download/codex-skill.zip -o codex-skill.zip
-unzip codex-skill.zip -d ~/.claude/skills/
+# 下载最新版本（替换 vX.Y.Z 为实际版本号，如 v0.2.0）
+curl -L https://github.com/cyenxchen/codex-skill/releases/latest/download/codex-skill-v0.2.0.zip -o codex-skill.zip
+
+# 解压到 Claude skills 目录
+unzip codex-skill.zip -d ~/.claude/skills/codex
 ```
 
 **方法二：Git Clone + Symlink**
 ```bash
 git clone https://github.com/cyenxchen/codex-skill.git
-ln -s $(pwd)/codex-skill ~/.claude/skills/codex
+ln -s "$(pwd)/codex-skill" ~/.claude/skills/codex
 ```
 
 **检查点**：
-- 确认 `~/.claude/skills/codex/` 目录存在
-- 确认包含 SKILL.md 文件
+- 确认 `~/.claude/skills/codex/SKILL.md` 文件存在
+- 运行 `ls ~/.claude/skills/codex/` 查看目录内容
 
 ---
 
@@ -102,8 +105,8 @@ claude mcp test codex
 
 **步骤 1**：验证 Skill 安装
 ```bash
-claude plugin list
-# 确认 codexmcp-commands 在列表中
+# 检查 SKILL.md 是否存在
+ls ~/.claude/skills/codex/SKILL.md
 ```
 
 **步骤 2**：手动调用命令

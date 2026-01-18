@@ -51,8 +51,8 @@ ls ~/.claude/skills/codex/SKILL.md
 # 克隆仓库
 git clone https://github.com/cyenxchen/codex-skill.git
 
-# 创建软链接（使用绝对路径）
-ln -s "$(pwd)/codex" ~/.claude/skills/codex
+# 创建软链接（在 codex-skill 的父目录运行）
+ln -s "$(pwd)/codex-skill" ~/.claude/skills/codex
 
 # 验证安装
 ls -la ~/.claude/skills/codex/SKILL.md

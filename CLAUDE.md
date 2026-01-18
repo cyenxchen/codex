@@ -70,4 +70,4 @@ PROMPT templates are in `reference/shared-patterns.md` under "Codex 调用模板
 
 ## Release Process
 
-Push a tag (e.g., `git tag v0.1.0 && git push origin v0.1.0`) to trigger GitHub Actions workflow that creates a release with packaged zip file.
+Push a tag (e.g., `git tag v0.2.0 && git push origin v0.2.0`) to trigger GitHub Actions workflow that creates a release with packaged zip file.

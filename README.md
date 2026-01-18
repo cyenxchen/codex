@@ -51,8 +51,8 @@ Best for developers who want to contribute or customize.
 # Clone the repository
 git clone https://github.com/cyenxchen/codex-skill.git
 
-# Create symlink (using absolute path)
-ln -s "$(pwd)/codex" ~/.claude/skills/codex
+# Create symlink (run from parent directory of codex-skill)
+ln -s "$(pwd)/codex-skill" ~/.claude/skills/codex
 
 # Verify installation
 ls -la ~/.claude/skills/codex/SKILL.md
