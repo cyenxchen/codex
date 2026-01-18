@@ -1,34 +1,24 @@
 ---
 name: codex
-description: Collaborate with Codex AI for code review, planning, and debugging. Use when: review/audit code, plan/design features, debug/locate bugs. Supports .claude/plans/ context.
-version: 0.2.0
+description: |
+  与 Codex AI 协作进行代码审查、规划和调试。
+  触发词：codex、review、audit、审查、plan、规划、debug、定位、analyze、分析。
+  Use when: review/audit code, plan/design features, debug/locate bugs.
+  Supports .claude/plans/ context.
 user-invocable: true
-triggers:
-  - codex
-  - review
-  - audit
-  - 审查
-  - plan
-  - 规划
-  - debug
-  - 定位
-  - analyze
-examples:
-  - "帮我用 codex 审查 src/app.py"
-  - "和 codex 一起规划登录功能"
-  - "让 codex 分析这个 TypeError"
 allowed-tools:
   - mcp__codex__codex
   - Read
   - Grep
   - Glob
   - Bash(git:*)
+  - Bash(bash:scripts/pre-codex-check.sh)
 hooks:
   PreToolUse:
     - matcher: "mcp__codex__codex"
       hooks:
-        - type: prompt
-          prompt: "STOP! Verify before calling Codex: 1) Did you Glob('.claude/plans/*.md') AND Glob('~/.claude/plans/*.md')? 2) If plans found, did you Read and assess relevance? 3) Is relevant plan path in PROMPT? 4) Did you output preliminary analysis? 5) sandbox='read-only'? | 停！调用前验证：1) 是否已执行 Glob('.claude/plans/*.md') 和 Glob('~/.claude/plans/*.md')？2) 若有计划，是否已 Read 判断相关性？3) 若相关，PROMPT 是否包含计划路径？4) 是否已输出初步分析？5) sandbox='read-only'？"
+        - type: command
+          command: "bash scripts/pre-codex-check.sh"
 ---
 
 # Codex 协作指南
