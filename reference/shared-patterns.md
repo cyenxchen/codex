@@ -2,19 +2,18 @@
 
 本文档定义了所有 Codex 协作命令共享的核心规则、工作流程和模式。
 
-> **⚠️ 关键检查点**：每次调用 `mcp__codex__codex` 前，**必须**执行：
-> 1. `Glob('.claude/plans/*.md')` - 项目级
-> 2. `Glob('$HOME/.claude/plans/*.md')` - 全局级（需先展开 $HOME）
+> **⚠️ 关键检查点**：调用 `mcp__codex__codex` 前，请将计划(plan)文件路径显式传递给 Codex。
+> 若未指定 `plan=<path>`，可自动检测项目级 `.claude/plans/*.md`。
 
 ## 核心规则
 
 以下规则适用于所有 Codex 协作场景，必须严格遵守：
 
-### 0. 计划检测优先（零号规则）
-调用 Codex 前**必须**检测计划文件：
-- 项目级：`.claude/plans/*.md`
-- 全局级：`$HOME/.claude/plans/*.md`（Glob 不展开 `~`，需用绝对路径）
-- Read 最近修改的文件判断相关性
+### 0. 计划(plan)文件显式传递（零号规则）
+调用 Codex 前，请将前面生成的计划(plan)文件路径显式传递：
+- 通过 `plan=<path>` 参数传递
+- 若未指定，可自动检测项目级：`.claude/plans/*.md`
+- Read 文件判断与当前任务的相关性
 - 若相关，在 PROMPT 中包含计划路径
 
 ### 1. 先自检再调用
@@ -64,10 +63,6 @@ Codex session: <SESSION_ID>
 
 在执行 Codex 协作命令时，支持自动检测或手动指定计划文档，为 Codex 提供更丰富的上下文。
 
-> **⚠️ 注意**：Glob 工具不会展开 `~` 波浪线。检测全局计划时，
-> 需要先通过 `echo $HOME` 获取用户目录，再拼接路径使用 Glob。
-> 例如：若 `$HOME=/home/user`，则使用 `Glob('/home/user/.claude/plans/*.md')`
-
 ### 计划文件检测
 
 在第一步「确认输入」时，执行计划文件检测：
@@ -78,16 +73,15 @@ Codex session: <SESSION_ID>
 - 使用 Read 工具验证文件存在
 - `plan=none` 表示禁用自动检测
 
-#### 2. 自动检测
+#### 2. 自动检测（仅项目级）
 
 若未指定 plan 参数：
-1. 项目级：`Glob('.claude/plans/*.md')`
-2. 全局级：`Glob('$HOME/.claude/plans/*.md')`
-3. 若找到文件，按修改时间排序，取最近的一个
-4. **使用 Read 读取计划内容，判断与当前任务的相关性**
+1. `Glob('.claude/plans/*.md')` - 仅项目级
+2. 若找到文件，按修改时间排序，取最近的一个
+3. **使用 Read 读取计划内容，判断与当前任务的相关性**
    - 相关：计划主题、文件/模块、验收标准与当前任务匹配
    - 不相关：跳过，不传递给 Codex
-5. 若相关，记录绝对路径
+4. 若相关，记录绝对路径
 
 #### 3. 无计划文件
 
@@ -125,9 +119,7 @@ Codex session: <SESSION_ID>
 **计划文件检测**（按优先级）：
 1. 若 `plan=<path>`：验证并使用指定的计划文件
 2. 若 `plan=none`：跳过计划检测
-3. 否则：依次搜索：
-   - `Glob('.claude/plans/*.md')` - 项目级
-   - `Glob('$HOME/.claude/plans/*.md')` - 全局级
+3. 否则：`Glob('.claude/plans/*.md')` - 仅项目级
    取最近修改的有效计划文件
 
 **若信息不足，向用户提问后停止，不继续后续步骤。**
