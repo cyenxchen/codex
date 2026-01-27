@@ -394,9 +394,9 @@ Codex session: 019ba7a9-8b52-7723-971c-90454123c719 (继续)
 - [ ] JWT token 有效期 24 小时
 ```
 
-**用户输入**（自动检测计划）：
+**用户输入**（指定计划文件）：
 ```
-/codex-review src/auth/
+/codex-review src/auth/ plan-path=.claude/plans/auth-requirements.md
 ```
 
 **简化输出**：
@@ -428,25 +428,14 @@ Codex session: 019ba7a9-8b52-7723-971c-90454123c720
 
 **用户输入**：
 ```
-/codex-review git diff plan=.claude/plans/refactor-api.md
+/codex-review git diff plan-path=.claude/plans/refactor-api.md
 ```
 
 **场景**：审查重构改动，对照指定的重构计划
 
 ---
 
-### 示例 3：禁用计划自动检测
-
-**用户输入**：
-```
-/codex-review src/utils.py plan=none
-```
-
-**场景**：不希望关联任何计划文件，进行独立审查
-
----
-
-### 示例 4：基于已有计划优化（codex-plan）
+### 示例 3：基于已有计划优化（codex-plan）
 
 **场景**：已有初步计划，需要 Codex 帮助补充和优化
 

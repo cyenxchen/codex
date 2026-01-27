@@ -2,7 +2,7 @@
 name: codex-plan
 description: Analyze requirements and generate implementation plans through Codex collaboration. Break down requirements into tasks, assess risks, and define acceptance criteria.
 allowed-tools: mcp__codex__codex, Read, Grep, Glob, Bash(git:*)
-argument-hint: [goal] [constraints] [plan=<path>] [session=<id>]
+argument-hint: [goal] [constraints] [plan-path=<path>] [session=<id>]
 ---
 
 # Codex 需求分析与实现计划
@@ -27,7 +27,7 @@ argument-hint: [goal] [constraints] [plan=<path>] [session=<id>]
 - **需求目标**：要实现的功能或解决的问题
 - **约束条件**：技术栈、性能要求、兼容性等
 - **可选参数**：
-  - `plan=<path>` - 指定已有计划文件（自动检测项目级 `.claude/plans/*.md` 和全局级 `~/.claude/plans/*.md`，`plan=none` 禁用）
+  - `plan-path=<path>` - 指定已有计划文件路径
   - `session=<id>` - 继续之前的会话
 
 **计划优化模式**：若检测到已有计划文件，将进入「计划优化模式」：

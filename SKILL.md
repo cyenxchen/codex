@@ -4,7 +4,6 @@ description: |
   与 Codex AI 协作进行代码审查、规划和调试。
   触发词：codex、review、audit、审查、plan、规划、debug、定位、analyze、分析。
   Use when: review/audit code, plan/design features, debug/locate bugs.
-  Supports .claude/plans/ context.
 user-invocable: true
 allowed-tools:
   - mcp__codex__codex
@@ -44,16 +43,12 @@ hooks:
 
 *详细说明见 reference/shared-patterns.md*
 
-## 计划文件检测
+## 计划文件传递
 
-在开始 Codex 协作任务前，检测计划文件：
-1. 若用户传递 `plan=<path>`，直接使用（**推荐**）
-2. 否则自动检测项目级：`Glob('.claude/plans/*.md')`
+若需要计划上下文，通过 `plan-path=<path>` 显式传递：
+- 示例：`/codex-review src/app.py plan-path=.claude/plans/feature.md`
 
-> **提示**：若当前处于 plan 模式，应通过 `plan=<当前plan路径>` 显式传递，
-> 避免自动检测的不确定性。
-
-**详细检测步骤见：** `reference/shared-patterns.md` 的"计划文档集成"章节
+**详细说明见：** `reference/shared-patterns.md` 的"计划文档集成"章节
 
 ## 场景识别
 
@@ -69,14 +64,9 @@ hooks:
 
 Codex 协作遵循以下工作流程：
 
-### >>> 前置：计划文件检测 <<<
+### >>> 前置：计划文件处理 <<<
 
-```
-1. 若有 plan=<path> 参数：直接使用
-2. 否则 Glob('.claude/plans/*.md')   # 仅项目级
-3. 若找到：Read 最近的文件，判断相关性
-4. 若相关：记录绝对路径，PROMPT 中包含
-```
+若 `plan-path=<path>` 参数存在：Read 文件，判断相关性，若相关则在 PROMPT 中包含路径。
 
 ---
 

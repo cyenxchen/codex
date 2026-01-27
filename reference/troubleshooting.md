@@ -204,50 +204,23 @@ SESSION_ID 绑定到特定的工作目录。如果切换了项目目录，需要
 
 ---
 
-#### Q7: 计划文件未被自动检测
+#### Q7: 如何传递计划文件
 
-**症状**：`.claude/plans/` 目录下有计划文件，但命令未使用
+**场景**：有现成的计划文件，希望 Codex 参考
 
-**原因**：
-1. 计划文件不是有效的 Markdown 格式
-2. 计划文件缺少必要的结构（标题、任务列表等）
-3. 文件扩展名不是 `.md`
+**解决方案**：使用 `plan-path=<path>` 显式指定计划文件路径
 
-**解决方案**：
-
-**步骤 1**：检查文件位置
 ```bash
-ls -la .claude/plans/*.md
+/codex-review src/app.py plan-path=.claude/plans/my-plan.md
+/codex-plan 新功能需求 plan-path=.claude/plans/existing-plan.md
+/codex-debug "错误信息" plan-path=.claude/plans/debug-notes.md
 ```
 
-**步骤 2**：验证文件内容
-计划文件应包含以下任一元素：
-- `##` 二级标题
-- `- [ ]` 或 `- [x]` 任务列表
-- 关键词：「验收标准」「任务拆解」「排查进展」
-
-**步骤 3**：手动指定计划
-```bash
-/codex-review src/app.py plan=.claude/plans/my-plan.md
-```
+**注意**：若不指定 `plan-path`，则不会传递任何计划上下文
 
 ---
 
-#### Q8: 如何禁用计划自动检测
-
-**场景**：不希望关联任何计划文件，进行独立审查
-
-**解决方案**：
-```bash
-# 使用 plan=none 禁用自动检测
-/codex-review src/app.py plan=none
-/codex-plan 新功能需求 plan=none
-/codex-debug "错误信息" plan=none
-```
-
----
-
-#### Q9: 计划文件过大导致超时
+#### Q8: 计划文件过大导致超时
 
 **症状**：计划文件超过 100 行，调用 Codex 时超时
 
@@ -261,17 +234,17 @@ ls -la .claude/plans/*.md
 **方案 2**：精简计划内容
 只保留与当前任务相关的部分（如只保留验收标准）。
 
-**方案 3**：使用 plan=none
+**方案 3**：不传递计划文件
 ```bash
-# 暂时禁用计划，完成后手动对照
-/codex-review src/app.py plan=none
+# 不指定 plan-path，完成后手动对照
+/codex-review src/app.py
 ```
 
 ---
 
 ### 输出和结果
 
-#### Q10: Codex 调用超时
+#### Q9: Codex 调用超时
 
 **症状**：命令卡住很久后返回 "调用超时"
 
@@ -309,7 +282,7 @@ echo $HTTPS_PROXY
 
 ---
 
-#### Q11: Codex 输出不完整
+#### Q10: Codex 输出不完整
 
 **症状**：Codex 的结论被截断，或只返回了部分结果
 
@@ -342,7 +315,7 @@ echo $HTTPS_PROXY
 
 ---
 
-#### Q12: Codex 的建议不准确
+#### Q11: Codex 的建议不准确
 
 **症状**：Codex 指出的问题不存在，或建议的修复不合理
 
